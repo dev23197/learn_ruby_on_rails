@@ -5,8 +5,10 @@ class User < ApplicationRecord
 
   private
     def set_default_role
-      self.role = "user"
-      Rails.logger.info("User role set to default: user")
+      if admin? && User.where(role: "admin").count == 1
+        throw :abort
+      end
+      Rails.logger.info("Checked the admin count")
     end
 
     def log_creation
@@ -14,7 +16,6 @@ class User < ApplicationRecord
       yield
       Rails.logger.info("User created with email: #{email}")
     end
-
     def send_welcome_email
       UserMailer.welcome_email(self).deliver_later
       Rails.logger.info("User welcome email sent to: #{email}")
