@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_28_072248) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_29_091543) do
   create_table "accounts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -19,6 +19,23 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_072248) do
   create_table "addressvalidators", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "apppointments", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "assemblies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "author_number"
+    t.string "author_name"
   end
 
   create_table "book_orders", force: :cascade do |t|
@@ -43,9 +60,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_072248) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "manifests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "names", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "novels", force: :cascade do |t|
+    t.string "title"
+    t.integer "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_novels_on_author_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -53,7 +83,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_072248) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "people", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "physicians", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -71,6 +116,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_072248) do
   create_table "products_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "product_id", null: false
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tests", force: :cascade do |t|
@@ -93,5 +143,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_28_072248) do
     t.string "role"
   end
 
+  add_foreign_key "novels", "authors"
   add_foreign_key "products", "users"
 end
