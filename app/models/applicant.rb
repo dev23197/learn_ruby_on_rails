@@ -1,8 +1,15 @@
 class Applicant
-  include ActiveModel::SecurePassword
+  include ActiveModel::Serialization
 
-  has_secure_password
-  has_secure_password :recovery_password, validations: false
+  attr_accessor :name, :age
 
-  attr_accessor :password_digest, :recovery_password_digest
+  def attributes
+    # Declaration of attributes that will be serialized
+    { "name" => nil, "age" => nil }
+  end
+
+  def capitalized_name
+    # Declared methods can be later included in the serialized hash
+    name&.capitalize
+  end
 end
