@@ -1,0 +1,22 @@
+<%= render "application/ad_banner" %>
+
+<h1>Products</h1> 
+<p>Here are a few of our fine products:</p>
+<% @products.each do |product| %>
+<%= render partial: "product". locals: { product: product} %>
+
+<% end %>
+
+<%= render "application/footer" %>
+
+
+
+<%= tag.div id: dom_id(my_product) do %>
+<h1><%= my_product.name %></h1>
+<% end %>
+
+
+<% product_reviews.each do |review| %>
+
+<% end %>
+<% end %>
