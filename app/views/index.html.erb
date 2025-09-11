@@ -1,0 +1,47 @@
+<%= form_with url: "/search", method: :get do |form| %>
+<%= forrm.label :query, "Search for:" %>
+<%= form.search_field :query %>
+<%= form.submit "Search" %>
+<% end %>
+
+
+
+<%= form.checkbox :biography %>
+<%= form.label :biography, "Biography" %>
+<%= form.checkbox :romance %>
+<%= form.label :romance, "Romance" %>
+<%= form.checkbox :mystery %>
+<%= form.label :mystery, "Mystery" %>
+
+
+
+<%= form.radio_button :flavor, "chocolate_chip" %>
+<%= form.label :flavor_chocolate_chip, "Chocolate Chip" %>
+<%= form.radio_button :flavor, "vanilla" %>
+<%= form.label :flavor_vanilla, "Vanilla" %>
+<%= form.radio_button :flavor, "hazelnut" %>
+<%= form.label :flavor_hazelnut, "Hazelnut" %>
+
+
+
+<%= form.date_field :born_on %>
+<%= form.time_field :started_at %>
+<%= form.datetime_local_field :graduation_day %>
+<%= form.month_field :birthday_month %>
+<%= form.week_field :birthday_week  %>
+
+
+
+<%= form.password_field :password %>
+<%= form.email_field :address %>
+<%= form.telephone_field :phone %>
+<%= form.url_field :homepage %>
+
+
+
+<%= form.textarea :message, size: "70x5" %>
+<%= form.hidden_field :parent_id, value: "foo" %>
+<%= form.number_field :price, in: 1.0..20.0, step: 0.5 %>
+<%= form.range_field :discount, in: 1..100 %>
+<%= form.search_field :name %>
+<%= form.color_field :favorite_color %>
