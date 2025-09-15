@@ -1,14 +1,31 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  resources :handles
+ resources :brands, only: [ :index, :show ]
+ resources :products, only: [ :index, :show ] do
+end
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+resources :basket, only: [ :show, :update, :destroy ]
 
-  # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
-  # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
-  # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+resolve("Basket") { route_for(:basket) }
+end
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+
+# Advanced Controller
+
+Rails.application.routes.draw do
+  resources :handles
+  get "*path", to: "restricted_list#index",
+  constraints: lambda { |request| RestrictedList.retrieve_ips.include?
+  (request.remote_ip) }
+end
+
+
+# Constarins in a block form
+
+Rails.application.routes.draw do
+  resources :handles
+  constraints(RestrictedListConstraint.new) do
+    get "*path", to: "restricted_list#index"
+    get "*other-path", to: "other_restricted_list#index"
+  end
 end

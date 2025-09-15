@@ -33,3 +33,54 @@ class ClientsController < ApplicationController
    end
  end
 end
+
+
+
+
+
+# STREAMING AND FILE DOWNLOADS
+# how to use send_dats:
+require "prawn"
+class ClientsController < ApplicationController
+  def download_pdf
+    client = Client.find(params[:id])
+    send_data generate_pdf(client),
+    filename: "#{client.name}.pdf",
+    type: "application/pdf"
+  end
+
+  private
+  def generate_pdf(client)
+    Prawn::Document.new do
+      text client.name, align: :center
+      text "Address: #{client.address}"
+      text "Email: #{client.email}"
+    end.render
+  end
+end
+
+
+# Sending filees
+# using send_file method
+
+class ClientsController < ApplicationController
+  def download_pdf
+  send_file("#{Rails.root}/files/clients/#{client.id}.pdf",
+              filename: "#{client.name}.pdf",
+              type: "application/pdf")
+end
+end
+
+
+
+# RESTful Downloads
+class ClientsController < AppplicationController
+  def show
+    @client = Client.find(params[:id])
+
+    respond_to do |format|
+      format.html
+      format.pdf { render pdf: generate_pdf(@client) }
+    end
+  end
+end

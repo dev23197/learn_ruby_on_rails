@@ -1,0 +1,11 @@
+<% content_for :title, "New handle" %>
+
+<h1>New handle</h1>
+
+<%= render "form", handle: @handle %>
+
+<br>
+
+<div>
+  <%= link_to "Back to handles", handles_path %>
+</div>
