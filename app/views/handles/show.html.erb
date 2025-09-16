@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @handle %>
+
+<div>
+  <%= link_to "Edit this handle", edit_handle_path(@handle) %> |
+  <%= link_to "Back to handles", handles_path %>
+
+  <%= button_to "Destroy this handle", @handle, method: :delete %>
+</div>

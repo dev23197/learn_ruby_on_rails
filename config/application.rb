@@ -25,3 +25,8 @@ module Feedback
     # config.eager_load_paths << Rails.root.join("extras")
   end
 end
+
+
+
+
+config.action_mailer.default_url_options = { host: "example.com " }

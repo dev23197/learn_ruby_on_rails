@@ -1,0 +1,75 @@
+<%= # @book = Book.new
+# => #<Book id: nil, title: nil, author: nil> %>
+
+
+
+<%= form_with model: @book do |form| %>
+<div>
+    <%= form.label :title %>
+    <%= form.text_field :tittle %>
+    </div>
+    <div>
+        <%= form.lable :author %>
+        <%= form.text_field :author %>
+  </div>
+  <%= form.submit %>
+<% end %>
+
+
+
+
+<%#@book = Book.find([2, 25])
+# => #<Book id: 25, title: "Some book", author_id: 2%> 
+
+
+
+<%= form_with model: @book do |form| %>
+  <%= form.text_field :title %>
+  <%= form.submit %>
+<% end %>    
+
+
+
+<%=form_with model: @person do |person_form| %>
+<%= person_form.text_field :name %>
+<%= fields_for :contact_detail, @person.contact_detail do |contact_details_form| %>
+
+<%= contact_details_form.text_field :phone_number %>
+<% end %>
+<% end %>
+
+
+
+<%= form.select :city, ["Berlin", "Chicago", "Madrid" ] %>
+
+
+
+
+<%= form.select :city, [["Berrlin", "BE"], ["Chicago", "CHI"], ["Madrid", "MD"]] %>
+
+
+<%= form_with model: @person do |person_form| %>
+<%= person_form.text_field :name %>
+<%= @person.addresses.each do |address| %>
+<%= person_form.fields_for address, index: address.id do |address_form|
+%>
+<%= address_form.text_field :city %>
+<% end %>
+<% end %>
+<% end %>
+
+
+
+<%= form_with model: @person do |form| %>
+Addresses: 
+<ul>
+  <%= form.fields_for :addresses do |addesses_form| %>
+  <li>
+    <%= addresses_form.checkbox :_destroy %>
+    <%= addresses_form.label :kind %>
+    <%= addresses_form.text_field :kind %>
+    
+  </li>
+  <% end %>
+  </ul>
+  <% end %>
